@@ -1,10 +1,10 @@
 'use strict'
 
-/** BOT LIKE **/
-/** CODE BY CCOCOT | CCOCOT.CO **/
-/** ccocot@bc0de.net **/
-/** BC0DE.NET - NAONLAH.NET - WingKocoli **/
-/** NOTE : RUN WITH PM2 **/
+/** BOT LIKE InstagramV.1 **/
+/** CODE By pangsitDc0de **/
+/** Pangsitdc0de@outlook.com **/
+/** NoMoneyNoLive - CrazyFriends404 - NewYear2k18 | AKAMSI.Pauwa **/
+/** NOTE : RUN WITH M3K1 **/
 
 const Client = require('instagram-private-api').V1;
 const delay = require('delay');
@@ -16,7 +16,7 @@ const User = [
     {
         type:'input',
         name:'username',
-        message:'Insert Username',
+        message:'Username Lo',
 	validate: function(value){
 		if(!value) return 'Can\'t Empty';
 		return true;
@@ -25,7 +25,7 @@ const User = [
     {
         type:'password',
         name:'password',
-        message:'Insert Password',
+        message:'Password Lo',
         mask:'*',
 	validate: function(value){
 		if(!value) return 'Can\'t Empty';
@@ -35,11 +35,11 @@ const User = [
     {
         type:'input',
         name:'sleep',
-        message:'Insert Sleep (In MiliSeconds)',
+        message:'Waktu Yang Diinginkan (Reccomend 40000)',
         validate: function(value){
             value = value.match(/[0-9]/);
             if (value) return true;
-            return 'Delay is number';
+            return 'Sabar MeK';
         }
     }
 ]
@@ -64,26 +64,26 @@ const Login = async function(User){
 const Like = async function(session,media){
     try {
         if (media.params.hasLiked) {
-           return chalk`{bold.blue Already Liked}`;
+           return chalk`{bold.blue Udah Lo Like}`;
         }
         await Client.Like.create(session, media.id);
-        return chalk`{bold.green Liked}`;
+        return chalk`{bold.green Topcer}`;
     } catch (err) {
-        return chalk`{bold.red Failed}`;
+        return chalk`{bold.red Mampos}`;
     }
 }
 
 const Excute = async function(User, sleep){
     try {
-        console.log(chalk`\n{yellow [?] Try to Login ....}`);
+        console.log(chalk`\n{yellow [?] Sedang Login Mek ....}`);
         const doLogin = await Login(User);
-        console.log(chalk`{green [+] Login Succsess}, {yellow Try Like all media in feed ....}`);
+        console.log(chalk`{green [+] Login Succsess mek}, {yellow Dilarang Ketawa Sebelum Ketawa itu dilarang ....}`);
         const feed = new Client.Feed.Timeline(doLogin.session);
         var cursor;
         do {
             if (cursor) feed.setCursor(cursor);
             var media = await feed.get();
-            media = _.chunk(media, 5);
+            media = _.chunk(media, 10);
             for (var i = 0; i < media.length; i++) {
                 await Promise.all(media[i].map(async (media) => {
                     const doLike = await Like(doLogin.session, media);
@@ -99,9 +99,9 @@ const Excute = async function(User, sleep){
 }
 
 console.log(chalk`
-{bold Instagram BOT LIKE v1}
-{green BC0DE.NET - NAONLAH.NET - WingKocoli}
-{bold.red Code By Ccocot | ccocot@bc0de.net}
+{bold BOT LIKE InstagramV.1}
+{green NoMoneyNoLive - CrazyFriends404 - NewYear2k18 | AKAMSI.Pauwa}
+{bold.red Code By pangsitdc0de | pangsitDx0de.outlook.com}
 {bold /** NOTE : RUN WITH PM2 **/}
 `);
 
